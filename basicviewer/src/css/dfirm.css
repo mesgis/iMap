@@ -1,0 +1,169 @@
+
+/*The image specified for the body is used to apply the gradient background to the entire page*/
+body {
+  background:url(../../assets/dfirm/body_bg.png) repeat-x #97a7b8;
+}
+#leftPane {
+  background-color:#e9eef2;
+}
+
+/*overwrite style for titleDiv */
+.titleDiv {
+    position: relative;
+    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.subTitle
+{
+	margin-left: 10px;
+    bottom: 0;
+    display:inline;
+	font-size: 24px;
+	vertical-align:middle;
+	height: 44px;
+}
+
+#toolbarDij{
+  height:80px;
+}
+
+#search 
+{
+	margin-right: 20px;
+	position: relative;
+}
+
+#widget_selectZoom 
+{
+	width: 222px;
+	margin-top: 7px;
+	float:right;
+	margin-right: 20px;	
+}
+
+/*Overwrite Styles for the toolbar buttons*/
+.esriBasemapIcon {
+    background-image: url(../../assets/dfirm/Basemaps.PNG);
+}
+.esriLocationIcon{
+    background-image: url(../../assets/dfirm/Location.PNG);
+}
+.esriPrint .dijitComboButton .dijitIcon{
+    background-image:url(../../assets/dfirm/Print.PNG);
+}
+.esriPrintIcon{
+    background-image:url(../../assets/dfirm/Print.PNG);
+}
+.claro .dijitArrowButtonInner {
+    background-image: url("../../assets/dfirm/ArrowButton.png");
+}
+
+/*override claro background and other props*/
+/*#toolbarContainer .dijitToolbar {
+  background:url(../../assets/blue/toolbar_bg.png) repeat-x #6788a2;
+}*/
+/*Measure toggle button*/
+.claro .dijitToolbar .dijitButtonNode:hover {
+  background:url(../../assets/dfirm/sidebar_header_active_bg.png) repeat-x #cee1ec;
+}
+.claro .dijitToolbar .dijitToggleButtonChecked .dijitButtonNode {
+   background:url(../../assets/dfirm/sidebar_header_active_bg.png) repeat-x #cee1ec;
+}
+.dojoxFloatingPaneTitle{
+  background:url(../../assets/dfirm/toolbar_bg.png) repeat-x #366aac;
+}
+
+/* Change color of tab menu*/
+.claro .dijitTab{
+    background-color: #7DA4BC;
+    background-image: none !important;
+    color: #ffffff;
+}
+.claro .dijitTablisContainer{
+    background-color: #7DA4BC;
+}
+
+.claro .dijitTabListContainer-top .dijitTabStripButtonDisabled{
+    background-color: #7DA4BC;
+}
+
+.claro .dijitTabListContainer-bottom .dijitTabStripButtonDisabled{
+    background-color: #7DA4BC;
+}
+
+.claro .dijitTabListContainer-top .dijitContentPane{
+    background-color: #7DA4BC;
+}
+
+.claro .dijitTabController{
+    background-color: #366aac;
+}
+
+.claro .dijitTabContainerTop-tabs .dijitTabChecked {
+    background-color: #7DA4BC;
+    background-image: none !important;
+}
+.claro .dijitTabListContainer-top .tabStripButton{
+    background-image: none !important;
+}
+.claro .dijitTabStripMenuIcon {
+    background-position: -150px 50%;
+}
+.claro .dijitTabStripSlideRightIcon{
+    background-position: -124px 50%;
+}
+.claro .dijitTabContainerTop-dijitContentPane, .claro .dijitTabContainerLeft-dijitContentPane, .claro .dijitTabContainerBottom-dijitContentPane, .claro .dijitTabContainerRight-dijitContentPane, .claro .dijitAccordionContainer-dijitContentPane{
+    background-color: #eaf4ff;
+}
+.claro .dijitTabListContainer-top .tabStripButtonDisabled, .claro .dijitTabListContainer-bottom .tabStripButtonDisabled{
+    background-color: #3D5971;
+}
+
+.esriPopup .titlePane{
+  background-color:#366aac;
+  border-style:none;
+}
+
+.esriPopup .titleButton,
+.esriPopup .pointer,
+.esriPopup .outerPointer,
+.esriPopup .esriViewPopup .gallery .mediaHandle,
+.esriPopup .esriViewPopup .gallery .mediaIcon{
+  background: url(../../assets/dfirm/popup.png) no-repeat scroll 0 0 transparent;
+}
+
+/*Attribute Inspector button styling (delete buttons)*/
+.esriAttributeInspector div.atiButtons span.dijit span.dijitReset{
+  background:url(../../assets/dfirm/toolbar_bg.png) repeat #366aac;
+  color:#fff;
+  border: none;
+}
+.esriAttributeInspector div.atiButtons span.dijit span.dijitReset:hover{
+  background:url(../../assets/dfirm/sidebar_header_active_bg.png) repeat-x #cee1ec;
+  color:#000;
+}
+
+/*slider background*/
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton ,.esriSimpleSliderVertical .esriSimpleSliderDecrementButton  {
+  background:url(../../assets/dfirm/toolbar_bg.png) repeat-x #366aac;
+  border:solid 1px #6788a2;
+}
+
+ /*Identity Manager Dialog*/
+.claro .dijitDialogTitleBar {
+  background:url(../../assets/dfirm/toolbar_bg.png) repeat-x #545454;
+  color:#fff;
+  border: solid 1px #366aac;
+}
+.claro .dijitDialog {
+    border: 1px solid #808080;
+}
+
+.claro .dijitDialogPaneActionBar .dijitButtonNode{
+  background-image:none;
+  border: solid 1px #6788a2;
+  background:url(../../assets/dfirm/sidebar_header_active_bg.png) repeat-x #CEE1EC;
+}
+.esriBookmarkItem:hover{
+  background-color:#CEE1EC;
+}

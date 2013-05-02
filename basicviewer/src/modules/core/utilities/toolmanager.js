@@ -3,9 +3,9 @@
  */
 define(["dojo/_base/declare", "../utilities/environment", "dojo/_base/lang", "dojo/Evented", "dijit/registry", "require", "dojo/dom", "dijit/layout/ContentPane"
     , "dojox/widget/Standby", "../utilities/maphandler", "dojo/_base/array", "dojo/query"
-    , "dojox/layout/FloatingPane", "dojo/dom-construct", "dojo/on", "dijit/form/ToggleButton", "dijit/form/DropDownButton"],
-    function(declare, environment, lang, Evented, registry, require, dom, contentPane, Standby, mapHandler, dojoArray, query
-        , floatingPane, domConstruct, on, ToggleButton, DropDownButton){
+    , "dojox/layout/FloatingPane", "dojo/dom-construct", "dojo/on", "dijit/form/Button", "dijit/form/ToggleButton", "dijit/form/DropDownButton", "dijit/form/RadioButton", "dojo/store/Memory", "dijit/form/ComboBox"],
+    function (declare, environment, lang, Evented, registry, require, dom, contentPane, Standby, mapHandler, dojoArray, query
+        , floatingPane, domConstruct, on, Button, ToggleButton, DropDownButton, RadioButton, Memory, ComboBox) {
         return declare([], {
             //The application configuration properties (originated as configOptions from app.js then overridden by AGO if applicable)
             _AppConfig: null
@@ -17,7 +17,7 @@ define(["dojo/_base/declare", "../utilities/environment", "dojo/_base/lang", "do
             , _RightToolDiv: null
             //mapHandler contains a reference to the actual arcgis map object and helper fxns
 
-            , constructor: function(args) {
+            , constructor: function (args) {
                 this._AppConfig = args.AppConfig;
                 this._WebMap = args.WebMap;
 
@@ -25,14 +25,15 @@ define(["dojo/_base/declare", "../utilities/environment", "dojo/_base/lang", "do
                 this._CenterToolDiv = dom.byId("webmap-toolbar-center");
                 this._RightToolDiv = dom.byId("webmap-toolbar-right");
             }
+            
 
             /*** Function to handle loading the toolbar at the top of the map.  Many of the tools only create a button at startup
-             * and defer loading of the actual module until if/when the user actually clicks the button.
-             * This is the place to create new buttons for new widgets. See existing displayinterop below for the best sample.*/
+            * and defer loading of the actual module until if/when the user actually clicks the button.
+            * This is the place to create new buttons for new widgets. See existing displayinterop below for the best sample.*/
             , CreateTools: function () {
                 if (this._AppConfig.displayprint === "true" || this._AppConfig.displayprint === true) {
                     require(["esri/dijit/Print"],
-                        lang.hitch(this, function(PrintDijit) {
+                        lang.hitch(this, function (PrintDijit) {
                             this._addPrint(PrintDijit);
                         })
                     );
@@ -41,9 +42,9 @@ define(["dojo/_base/declare", "../utilities/environment", "dojo/_base/lang", "do
                 //The measure tool with options in a floating pane
                 if (this._AppConfig.displaymeasure === 'true' || this._AppConfig.displaymeasure === true) {
                     /*require(["esri/dijit/Measurement"],
-                        lang.hitch(this, function(MeasurementDijit) {
-                            this._addMeasurementWidget(MeasurementDijit);
-                        })
+                    lang.hitch(this, function(MeasurementDijit) {
+                    this._addMeasurementWidget(MeasurementDijit);
+                    })
                     );*/
 
                     //*** Give button a unique btnId, set title, iconClass as appropriate
@@ -64,7 +65,7 @@ define(["dojo/_base/declare", "../utilities/environment", "dojo/_base/lang", "do
                 if (this._AppConfig.displaybasemaps === "true" || this._AppConfig.displaybasemaps === true) {
                     //Get the basemap dijit- a dropdown button with the dropdown content
                     require(["../basemaps"],
-                        lang.hitch(this, function(basemapDijit) {
+                        lang.hitch(this, function (basemapDijit) {
                             var baseMapBtn = new basemapDijit({
                                 id: "basemapBtn",
                                 iconClass: "esriBasemapIcon",
@@ -76,6 +77,29 @@ define(["dojo/_base/declare", "../utilities/environment", "dojo/_base/lang", "do
                         })
                     );
                 }
+
+                if (this._AppConfig.zoomtocounty === "true" || this._AppConfig.zoomtocounty === true) {
+
+
+
+
+                    require(["../zoom"],
+                        lang.hitch(this, function (floodDijit) {
+                            var zoomToBtn = new floodDijit({
+                                label: "Zoom",
+                                iconClass: "esriLocationIcon",
+                                //id: ZoomTest,
+                                AppConfig: this._AppConfig
+                            });
+                            //Button gets added to toolbar
+                            this._CenterToolDiv.appendChild(zoomToBtn.domNode);
+                        })
+                    );
+                    //this._CenterToolDiv.appendChild(submitbtn.domNode);
+
+
+                }
+
 
                 //*** This is the add shapefile tool, created as a module. Use this as a pattern for new tools.
                 // The _AppConfig parameter originates in app.js, and can be overridden by AGO if parameter is made configurable in config.js.
@@ -93,6 +117,7 @@ define(["dojo/_base/declare", "../utilities/environment", "dojo/_base/lang", "do
 
                     this._CreateToolButton(widgetParams, btnId, btnTitle, btnIconClass, modulePath, true);
                 }
+
 
                 //*** This is the location tool (GPS), created as a module. Use this as a pattern for new tools, if no floating pane needed.
                 if (this._AppConfig.displaylocation === "true" || this._AppConfig.displaylocation === true) {
@@ -126,26 +151,26 @@ define(["dojo/_base/declare", "../utilities/environment", "dojo/_base/lang", "do
                 //On the first click, dynamically load the module from the server. Then remove the click handler. lang.hitch keeps the scope in this module
                 var toolClick = on(theBtn, "click", lang.hitch(this, function () {
                     toolClick.remove();
-                    try { document.body.style.cursor = "wait"; } catch (e) {}
+                    try { document.body.style.cursor = "wait"; } catch (e) { }
                     //*** Set the relative location to the module
-                    require([modulePath], lang.hitch(this, function(customDijit) {
+                    require([modulePath], lang.hitch(this, function (customDijit) {
                         var theDijit = new customDijit(widgetParams);
                         if (startupDijit)
                             theDijit.startup();
-                        try { document.body.style.cursor = "auto"; } catch (e) {}
+                        try { document.body.style.cursor = "auto"; } catch (e) { }
                     }));
                 }));
             }
 
             , _addPrint: function (PrintDijit) {
-                var layoutOptions ={
-                    'authorText':this._AppConfig.owner,
+                var layoutOptions = {
+                    'authorText': this._AppConfig.owner,
                     'titleText': this._AppConfig.title,
                     'scalebarUnit': 'Miles', //(i18n.viewer.main.scaleBarUnits === 'english') ? 'Miles' : 'Kilometers',
-                    'legendLayers':[]
+                    'legendLayers': []
                 };
 
-                var templates = dojoArray.map(this._AppConfig.printlayouts,function(layout){
+                var templates = dojoArray.map(this._AppConfig.printlayouts, function (layout) {
                     layout.layoutOptions = layoutOptions;
                     return layout;
                 });
@@ -174,11 +199,11 @@ define(["dojo/_base/declare", "../utilities/environment", "dojo/_base/lang", "do
                 var titlePane = query('.dojoxFloatingPaneTitle')[0];
                 //add close button to title pane
                 /*var closeDiv = domConstruct.create('div', {
-                    id: "closeBtn",
-                    innerHTML: esri.substitute({
-                        close_title: 'Close Panel', //i18n.panel.close.title,
-                        close_alt: 'Close' //i18n.panel.close.label
-                    }, '<a alt=${close_alt} title=${close_title} href="JavaScript:toggleMeasure();"><img  src="images/close.png"/></a>')
+                id: "closeBtn",
+                innerHTML: esri.substitute({
+                close_title: 'Close Panel', //i18n.panel.close.title,
+                close_alt: 'Close' //i18n.panel.close.label
+                }, '<a alt=${close_alt} title=${close_title} href="JavaScript:toggleMeasure();"><img  src="images/close.png"/></a>')
                 }, titlePane);*/
                 var closeDiv = domConstruct.create('div', {
                     id: "measureCloseBtn",

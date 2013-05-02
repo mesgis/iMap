@@ -2,10 +2,10 @@
  Creates an ESRI basemaps dijit.
  Also contains a function to recreate an overview map (apparently needed when basemap is switched).
  */
-define(["dojo/_base/declare", "dijit/_WidgetBase", "dojo/_base/lang", "dojo/topic", "./utilities/maphandler", "dijit/layout/ContentPane"
+define(["dojo/_base/declare", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/topic", "./utilities/maphandler", "dijit/layout/ContentPane"
     , "dijit/Menu", "esri/dijit/BasemapGallery", "dijit/registry", "dojo/aspect" /*, "./custommenu"*/
     , "dijit/form/DropDownButton", "dojo/dom", "dojo/dom-construct"],
-    function(declare, WidgetBase, lang, topic, mapHandler, ContentPane, Menu, BasemapGallery, registry, aspect /*, custommenu*/
+    function(declare, WidgetBase, TemplatedMixin, lang, topic, mapHandler, ContentPane, Menu, BasemapGallery, registry, aspect /*, custommenu*/
         , DropDownButton, dom, domConstruct){
         return declare([WidgetBase, DropDownButton], {
             // The ESRI map object to bind to the TOC. Set in constructor

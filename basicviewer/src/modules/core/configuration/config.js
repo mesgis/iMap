@@ -7,23 +7,23 @@
  */
 {
     "values": {
-        "displaybasemaps": "true",
-            "tablecontents": "true",
-            "displaylegend": "true",
-            "displayshare": "true",
-            "displaymeasure": "false",
-            "displaylocation": "false",
-            "displayelevation": "false",
-            "showelevationdifference": "false",
-            "theme": "gray",
-            "displaydetails": "true",
+        "displaybasemaps": true,
+            "tablecontents": true,
+            "displayshare": false,
+            "displaymeasure": false,
+            "displaylocation": true,
+            "displayelevation": false,
+            "showelevationdifference": false,
+            "theme": "imap",
+            "displaydetails": true,
             "startupwidget": "displaydetails",
-            "displayeditor": "true",
-            "displayoverviewmap": "true",
-            "displaytimeslider": "true",
-            "displayprint": "false",
-            "displaysearch": "true",
-            "displaydraw": "false"
+            "displayeditor": false,
+            "displayoverviewmap": true,
+            "displaytimeslider": false,
+            "displayprint": true,
+            "displaysearch": true,
+            "displaydraw": false,
+            "embed": false
     },
     "configurationSettings": [{
         "category": "<b>Layout</b>",
@@ -34,10 +34,7 @@
             "options": [{
                 "value": "imap",
                 "label": "MD iMap Basic"
-            }, {
-                "value": "sgg",
-                "label": "Smart, Green, & Growing"
-            }, {
+            },{
                 "value": "blue",
                 "label": "Blue"
             }, {
@@ -125,11 +122,16 @@
             "fieldName": "leftpanewidth",
             "type": "string",
             "tooltip": "in pixels"
+        },{
+            "label": "Embed in Host Page",
+            "fieldName": "embed",
+            "type": "boolean",
+            "tooltip": ""
         }]
     }, {
         "category": "<b>Widgets</b>",
         "fields": [{
-            "label": "Details *",
+            "label": "Details",
             "fieldName": "displaydetails",
             "type": "boolean",
             "tooltip": "Descriptions"
@@ -138,11 +140,6 @@
             "fieldName": "tablecontents",
             "type": "boolean",
             "tooltip": "Legend and Add Data"
-        }, {
-            "label": "Editor *",
-            "fieldName": "displayeditor",
-            "type": "boolean",
-            "tooltip": "Display editor if web map contains feature service layer"
         }, {
             "label": "Startup Widget:",
             "fieldName": "startupwidget",
@@ -154,25 +151,14 @@
                 "label": "Table of Contents",
                 "value": "tablecontents"
             }, {
-                "label": "Editor",
-                "value": "displayeditor"
-            }, {
                 "label": "None",
                 "value": "none"
             }],
             "tooltip": "Widget to show in left panel on load"
-        }, {
-            "value": "* These menu items will appear in the application when the web map has layers that require them.",
-            "type": "paragraph"
         }]
     }, {
         "category": "<b>Tools</b>",
         "fields": [{
-            "label": "Time Slider *",
-            "fieldName": "displaytimeslider",
-            "type": "boolean",
-            "tooltip": "Display time slider for time enabled web map"
-        }, {
             "label": "Print",
             "fieldName": "displayprint",
             "type": "boolean",
@@ -183,23 +169,8 @@
             "type": "boolean",
             "tooltip": ""
         }, {
-            "label": "Bookmarks",
-            "fieldName": "displaybookmarks",
-            "type": "boolean",
-            "tooltip": "Display the read-only bookmarks contained in the web map."
-        }, {
-            "label": "Measure",
-            "fieldName": "displaymeasure",
-            "type": "boolean",
-            "tooltip": ""
-        }, {
             "label": "Location",
             "fieldName": "displaylocation",
-            "type": "boolean",
-            "tooltip": ""
-        }, {
-            "label": "Share",
-            "fieldName": "displayshare",
             "type": "boolean",
             "tooltip": ""
         }, {
